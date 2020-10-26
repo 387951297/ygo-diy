@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Book Antiqua';
+    src: url('./Book Antiqua.ttf');
+}
+
+/* 卡包字体 */
+@font-face {
+    font-family: "ITCStoneSerif";
+    src: url("./42eca911046339afd6826e2b5db0a1c1.eot");
+    src: url("./42eca911046339afd6826e2b5db0a1c1.eot?#iefix") format("embedded-opentype"), url("./42eca911046339afd6826e2b5db0a1c1.woff2") format("woff2"), url("./42eca911046339afd6826e2b5db0a1c1.woff") format("woff"), url("./42eca911046339afd6826e2b5db0a1c1.ttf") format("truetype"), url("./42eca911046339afd6826e2b5db0a1c1.svg#ITC Stone Serif") format("svg");
+}
+
+/* 主要文字字体 */
+@font-face {
+    font-family: 'DFPLiShuW5-B5';
+    src: url('./华康隶书体W5-B5.ttf');
+}
+
+/* ATK DEF */
+@font-face {
+    font-family: 'MatrixBoldSmallCaps';
+    src: url('./MatrixBoldSmallCaps.woff2');
+}
+/* MatrixBoldSmallCaps.woff2
+ */
