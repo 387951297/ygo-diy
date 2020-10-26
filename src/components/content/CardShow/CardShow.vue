@@ -1,22 +1,31 @@
 <template>
+  <!-- 完整的卡片显示 -->
   <div class="card-img">
+    <!-- 卡片类型 -->
     <card-type :card-type="cardType"></card-type>
+    <!-- 卡片标题 -->
     <card-title
       :card-type="cardType"
-      :card-title="title"
+      :card-title="cardTitle"
     ></card-title>
+    <!-- 卡片属性 -->
     <card-attribute :card-acctribute="cardAcctribute"></card-attribute>
+    <!-- 星级、阶级 -->
     <card-star
       v-if="showStar"
       :number="cardNumber"
       :card-type="cardType"
     ></card-star>
+    <!-- 魔陷类型 -->
     <card-right-attribute
       v-if="showRightAttribute"
       :right-attribute-type="rightAttributeType"
     ></card-right-attribute>
+    <!-- 卡图 -->
     <card-inner-img :inner-img-src="innerImgSrc"></card-inner-img>
+    <!-- 卡包信息 -->
     <card-cardbag :cardbag-str="cardbagStr"></card-cardbag>
+    <!-- 卡片文本 -->
     <card-text
       :race-str="raceStr"
       :atk-str="atkStr"
@@ -24,7 +33,9 @@
       :card-type="cardType"
       :content-html="contentHtml"
     ></card-text>
+    <!-- 卡片id -->
     <card-id :card-id-str="cardIdStr"></card-id>
+    <!-- 版权信息 -->
     <card-copyright></card-copyright>
   </div>
 </template>
@@ -39,7 +50,7 @@ import CardInnerImg from "./CardInnerImg";
 import CardCardbag from "./CardCardbag";
 import CardText from "./CardText";
 import CardId from "./CardId";
-import CardCopyright from './CardCopyright';
+import CardCopyright from "./CardCopyright";
 
 export default {
   name: "card-show",
@@ -56,6 +67,7 @@ export default {
     CardCopyright,
   },
   computed: {
+    // 是否显示星级、阶级
     showStar() {
       switch (this.cardType) {
         case "magic":
@@ -66,6 +78,7 @@ export default {
           return true;
       }
     },
+    // 是否显示魔陷类型
     showRightAttribute() {
       switch (this.cardType) {
         case "magic":
@@ -76,21 +89,82 @@ export default {
       }
     },
   },
+  props: {
+    cardTitle: {
+      type: String,
+      default() {
+        return "error cardTitle";
+      },
+    },
+    cardType: {
+      type: String,
+      default() {
+        return "magic";
+      },
+    },
+    cardAcctribute: {
+      type: String,
+      default() {
+        return "light";
+      },
+    },
+    cardNumber: {
+      type: Number,
+      default() {
+        return 1;
+      },
+    },
+    rightAttributeType: {
+      type: String,
+      default() {
+        return "normal";
+      },
+    },
+    innerImgSrc: {
+      type: String,
+      default() {
+        return require("@/assets/img/inner.jpg");
+      },
+    },
+    cardbagStr: {
+      type: String,
+      default() {
+        return "error cardbagStr";
+      },
+    },
+    raceStr: {
+      type: String,
+      default() {
+        return "【】";
+      },
+    },
+    atkStr: {
+      type: String,
+      default() {
+        return "1000";
+      },
+    },
+    defStr: {
+      type: String,
+      default() {
+        return "1000";
+      },
+    },
+    contentHtml: {
+      type: String,
+      default() {
+        return "error contentHtml";
+      },
+    },
+    cardIdStr: {
+      type: String,
+      default() {
+        return "11111111";
+      },
+    },
+  },
   data() {
-    return {
-      title: "土豆好吃",
-      cardType: "magic",
-      cardAcctribute: "light",
-      cardNumber: 12,
-      rightAttributeType: "normal",
-      innerImgSrc: require("@/assets/img/inner.jpg"),
-      cardbagStr: "YMP1-JP007",
-      raceStr: "【魔法師族·同調／效果】",
-      atkStr: "1000",
-      defStr: "1000",
-      contentHtml: `土豆好吃<br>這張卡不用同調召喚。<br>這張卡不用同調召喚。<br>這張卡不用同調召喚。<br>這張卡不用同調召喚。<br>這張卡不用同調召喚。<br>這張卡不用同調召喚。`,
-      cardIdStr: "11111111",
-    };
+    return {};
   },
 };
 </script>
