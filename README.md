@@ -1,19 +1,4 @@
 # ygo-diy
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+本意是用来做游戏王卡diy卡片制作器，现在还没有做好
+edit by sys 20201026
