@@ -1,5 +1,8 @@
 <template>
-  <div class="card-cardbag">{{cardbagStr}}</div>
+  <div
+    class="card-cardbag"
+    :style="cardbagStyle"
+  >{{cardbagStr}}</div>
 </template>
 
 <script>
@@ -9,15 +12,46 @@ export default {
     cardbagStr: {
       type: String,
       default() {
-        return 'error cardbagStr'
-      }
-    }
+        return "error cardbagStr";
+      },
+    },
+    cardType: {
+      type: String,
+      validator(value) {
+        // 这个值必须匹配下列字符串中的一个
+        return (
+          [
+            "normal",
+            "effect",
+            "ceremony",
+            "fuse",
+            "homologue",
+            "xyz",
+            "magic",
+            "trap",
+            "derivative",
+          ].indexOf(value) !== -1
+        );
+      },
+      default() {
+        return "derivative";
+      },
+    },
   },
   components: {},
-  computed: {},
+  computed: {
+    cardbagStyle() {
+      switch (this.cardType) {
+        case "xyz":
+        case "trap":
+          return "color: #fff";
+        default:
+          return "";
+      }
+    },
+  },
   data() {
-    return {
-    };
+    return {};
   },
 };
 </script>
@@ -26,7 +60,7 @@ export default {
   position: absolute;
   top: 486px;
   right: 48px;
-  font-family: 'ITCStoneSerif';
+  font-family: "ITCStoneSerif";
   font-size: 14px;
 }
 </style>

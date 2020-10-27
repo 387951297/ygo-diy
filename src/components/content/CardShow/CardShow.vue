@@ -24,7 +24,10 @@
     <!-- 卡图 -->
     <card-inner-img :inner-img-src="innerImgSrc"></card-inner-img>
     <!-- 卡包信息 -->
-    <card-cardbag :cardbag-str="cardbagStr"></card-cardbag>
+    <card-cardbag
+      :cardbag-str="cardbagStr"
+      :card-type="cardType"
+    ></card-cardbag>
     <!-- 卡片文本 -->
     <card-text
       :race-str="raceStr"
@@ -34,9 +37,12 @@
       :content-html="contentHtml"
     ></card-text>
     <!-- 卡片id -->
-    <card-id :card-id-str="cardIdStr"></card-id>
+    <card-id
+      :card-id-str="cardIdStr"
+      :card-type="cardType"
+    ></card-id>
     <!-- 版权信息 -->
-    <card-copyright></card-copyright>
+    <card-copyright :card-type="cardType"></card-copyright>
   </div>
 </template>
 

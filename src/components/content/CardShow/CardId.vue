@@ -1,5 +1,8 @@
 <template>
-  <div class="card-id">{{cardIdStr}}</div>
+  <div
+    class="card-id"
+    :style="idStyle"
+  >{{cardIdStr}}</div>
 </template>
 
 <script>
@@ -9,15 +12,45 @@ export default {
     cardIdStr: {
       type: String,
       default() {
-        return ''
-      }
-    }
+        return "";
+      },
+    },
+    cardType: {
+      type: String,
+      validator(value) {
+        // 这个值必须匹配下列字符串中的一个
+        return (
+          [
+            "normal",
+            "effect",
+            "ceremony",
+            "fuse",
+            "homologue",
+            "xyz",
+            "magic",
+            "trap",
+            "derivative",
+          ].indexOf(value) !== -1
+        );
+      },
+      default() {
+        return "derivative";
+      },
+    },
   },
   components: {},
-  computed: {},
+  computed: {
+    idStyle() {
+      switch (this.cardType) {
+        case "xyz":
+          return "color: #fff";
+        default:
+          return "";
+      }
+    },
+  },
   data() {
-    return {
-    };
+    return {};
   },
 };
 </script>
