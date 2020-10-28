@@ -11,6 +11,10 @@
 </template>
 
 <script>
+import store from "@/store";
+import dsSrc from "@/assets/img/ds.png";
+import lsSrc from "@/assets/img/ls.png";
+
 export default {
   name: "card-star",
   components: {},
@@ -25,19 +29,7 @@ export default {
       type: String,
       validator(value) {
         // 这个值必须匹配下列字符串中的一个
-        return (
-          [
-            "normal",
-            "effect",
-            "ceremony",
-            "fuse",
-            "homologue",
-            "xyz",
-            "magic",
-            "trap",
-            "derivative",
-          ].indexOf(value) !== -1
-        );
+        return store.getters.cardTypeValues.indexOf(value) !== -1;
       },
       default() {
         return "derivative";
@@ -46,19 +38,13 @@ export default {
   },
   computed: {
     src() {
-      switch (this.cardType) {
-        case "normal":
-        case "effect":
-        case "ceremony":
-        case "fuse":
-        case "homologue":
-          return require("@/assets/img/ls.png");
-        case "xyz":
-          return require("@/assets/img/ds.png");
-          break;
-        default:
-          return "";
-          break;
+      let obj = store.state.cardType.find((x) => x.value == this.cardType);
+      if (obj.value == "xyz") {
+        return dsSrc;
+      } else if (obj.type != "magicTrap") {
+        return lsSrc;
+      } else {
+        return "";
       }
     },
   },

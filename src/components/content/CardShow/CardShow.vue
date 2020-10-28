@@ -78,7 +78,6 @@ export default {
       switch (this.cardType) {
         case "magic":
         case "trap":
-        case "derivative":
           return false;
         default:
           return true;

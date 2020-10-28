@@ -48,7 +48,7 @@
               </el-form-item>
               <el-form-item
                 label="属性"
-                v-show="showCardAcctribute"
+                v-show="isMonster"
               >
                 <el-radio-group v-model="mainForm.cardAcctribute">
                   <el-radio-button
@@ -60,7 +60,7 @@
               </el-form-item>
               <el-form-item
                 label="等级/阶级"
-                v-show="showcardNumber"
+                v-show="isMonster"
               >
                 <el-slider
                   v-model="mainForm.cardNumber"
@@ -71,7 +71,7 @@
               </el-form-item>
               <el-form-item
                 label="魔陷类型"
-                v-show="showrightAttributeType"
+                v-show="!isMonster"
               >
                 <el-radio-group v-model="mainForm.rightAttributeType">
                   <el-radio-button
@@ -89,9 +89,9 @@
               </el-form-item>
               <race-form
                 @setRaceStr="setRaceStr"
-                v-show="showRaceForm"
+                v-show="isMonster"
               ></race-form>
-              <el-row v-show="showATKDEF">
+              <el-row v-show="isMonster">
                 <el-col :span="12">
                   <el-form-item label="攻击力">
                     <el-input v-model="mainForm.atkStr"></el-input>
@@ -118,7 +118,7 @@
             </el-form>
           </div>
         </el-collapse-item>
-        <el-collapse-item name="3">
+        <!-- <el-collapse-item name="3">
           <template slot="title">
             <el-tag
               type="info"
@@ -126,7 +126,7 @@
             >高级参数</el-tag>
           </template>
           <div>简化流程：设计简洁直观的操作流程；</div>
-        </el-collapse-item>
+        </el-collapse-item> -->
       </el-collapse>
 
     </el-card>
@@ -134,7 +134,9 @@
 </template>
 
 <script>
+import store from "@/store";
 import RaceForm from "./RaceForm";
+
 export default {
   name: "main-form",
   components: { RaceForm },
@@ -159,192 +161,56 @@ export default {
       },
     },
   },
+  watch: {
+    "mainForm.cardType"(value) {
+      // 非魔陷、属性为魔陷时，改成光
+      if (
+        this.isMonster &&
+        ["trap", "magic"].indexOf(this.mainForm.cardAcctribute) != -1
+      ) {
+        this.mainForm.cardAcctribute = "light";
+        return;
+      }
+      // 怪兽卡不watch
+      if (this.isMonster) return;
+      // 魔陷时 固定属性
+      this.mainForm.cardAcctribute = value;
+    },
+  },
   computed: {
-    showCardAcctribute() {
+    // 根据卡片类型 判断是否为怪兽卡（实则为非魔陷）
+    isMonster() {
       return (
-        [
-          "normal",
-          "effect",
-          "ceremony",
-          "fuse",
-          "homologue",
-          "xyz",
-          // "magic",
-          // "trap",
-          // "derivative",
-        ].indexOf(this.mainForm.cardType) != -1
+        store.state.cardType.find((x) => x.value == this.mainForm.cardType)
+          .type != "magicTrap"
       );
     },
-    showcardNumber() {
-      return (
-        [
-          "normal",
-          "effect",
-          "ceremony",
-          "fuse",
-          "homologue",
-          "xyz",
-          // "magic",
-          // "trap",
-          // "derivative",
-        ].indexOf(this.mainForm.cardType) != -1
-      );
+    // 卡片类型列表
+    cardTypeList() {
+      return store.state.cardType;
     },
-    showrightAttributeType() {
-      return (
-        [
-          // "normal",
-          // "effect",
-          // "ceremony",
-          // "fuse",
-          // "homologue",
-          // "xyz",
-          "magic",
-          "trap",
-          // "derivative",
-        ].indexOf(this.mainForm.cardType) != -1
-      );
+    // 卡片属性列表（不带魔陷）
+    cardAcctributeList() {
+      return store.state.cardAcctribute.filter((x) => x.type == "monster");
     },
-    showRaceForm() {
-      return (
-        [
-          "normal",
-          "effect",
-          "ceremony",
-          "fuse",
-          "homologue",
-          "xyz",
-          // "magic",
-          // "trap",
-          // "derivative",
-        ].indexOf(this.mainForm.cardType) != -1
-      );
-    },
-    showATKDEF() {
-      return (
-        [
-          "normal",
-          "effect",
-          "ceremony",
-          "fuse",
-          "homologue",
-          "xyz",
-          // "magic",
-          // "trap",
-          // "derivative",
-        ].indexOf(this.mainForm.cardType) != -1
-      );
+    // 魔陷属性列表（区分魔陷）
+    rightAttributeTypeList() {
+      if (this.mainForm.cardType == "magic") {
+        return store.state.rightAttributeType.filter(
+          (x) => ["both", "magic"].indexOf(x.type) != -1
+        );
+      }
+      if (this.mainForm.cardType == "trap") {
+        return store.state.rightAttributeType.filter(
+          (x) => ["both", "trap"].indexOf(x.type) != -1
+        );
+      }
+      return store.state.rightAttributeType;
     },
   },
   data() {
     return {
       activeName: ["1", "2"],
-      cardTypeList: [
-        {
-          value: "normal",
-          label: "通常",
-        },
-        {
-          value: "effect",
-          label: "效果",
-        },
-        {
-          value: "ceremony",
-          label: "仪式",
-        },
-        {
-          value: "fuse",
-          label: "融合",
-        },
-        {
-          value: "homologue",
-          label: "同调",
-        },
-        {
-          value: "xyz",
-          label: "超量",
-        },
-        {
-          value: "magic",
-          label: "魔法",
-        },
-        {
-          value: "trap",
-          label: "陷阱",
-        },
-        {
-          value: "derivative",
-          label: "衍生物",
-        },
-      ],
-      cardAcctributeList: [
-        {
-          value: "dirt",
-          label: "地",
-        },
-        {
-          value: "water",
-          label: "水",
-        },
-        {
-          value: "fire",
-          label: "炎",
-        },
-        {
-          value: "wind",
-          label: "风",
-        },
-        {
-          value: "light",
-          label: "光",
-        },
-        {
-          value: "dark",
-          label: "暗",
-        },
-        {
-          value: "god",
-          label: "神",
-        },
-        // {
-        //   value: "magic",
-        //   label: "魔",
-        // },
-        // {
-        //   value: "trip",
-        //   label: "罠",
-        // },
-      ],
-      rightAttributeTypeList: [
-        {
-          value: "normal",
-          label: "普通",
-        },
-        {
-          value: "sustain",
-          label: "永续",
-        },
-        {
-          value: "quick",
-          label: "速攻",
-        },
-        {
-          value: "equip",
-          label: "装备",
-        },
-        {
-          value: "environment",
-          label: "场地",
-        },
-        {
-          value: "ceremony",
-          label: "仪式",
-        },
-        {
-          value: "counterattack",
-          label: "反击",
-        },
-      ],
     };
   },
   methods: {

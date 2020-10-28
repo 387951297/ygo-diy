@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import store from "@/store";
+
 export default {
   name: "card-copyright",
   props: {
@@ -16,19 +18,7 @@ export default {
       type: String,
       validator(value) {
         // 这个值必须匹配下列字符串中的一个
-        return (
-          [
-            "normal",
-            "effect",
-            "ceremony",
-            "fuse",
-            "homologue",
-            "xyz",
-            "magic",
-            "trap",
-            "derivative",
-          ].indexOf(value) !== -1
-        );
+        return store.getters.cardTypeValues.indexOf(value) !== -1;
       },
       default() {
         return "derivative";
