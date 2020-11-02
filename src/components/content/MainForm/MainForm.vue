@@ -104,13 +104,7 @@
                 </el-col>
               </el-row>
               <el-form-item label="效果文本">
-                <el-input
-                  type="textarea"
-                  :autosize="{ minRows: 2, maxRows: 8}"
-                  placeholder="请输入效果文本"
-                  v-model="mainForm.contentHtml"
-                >
-                </el-input>
+                <wang-editor @setContentHtml="setContentHtml"></wang-editor>
               </el-form-item>
               <el-form-item label="卡片id">
                 <el-input v-model="mainForm.cardIdStr"></el-input>
@@ -127,6 +121,28 @@
           </template>
           <div>简化流程：设计简洁直观的操作流程；</div>
         </el-collapse-item> -->
+        <el-collapse-item name="4">
+          <template slot="title">
+            <el-tag
+              type="info"
+              effect="dark"
+            >操作</el-tag>
+          </template>
+          <el-form
+            ref="mainForm"
+            :model="mainForm"
+            label-width="auto"
+            class="main-form-box"
+          >
+            <div class="card-center">
+              <el-form-item label="">
+                <button-export-img></button-export-img>
+                <button-print-img></button-print-img>
+              </el-form-item>
+            </div>
+          </el-form>
+
+        </el-collapse-item>
       </el-collapse>
 
     </el-card>
@@ -136,10 +152,13 @@
 <script>
 import store from "@/store";
 import RaceForm from "./RaceForm";
+import ButtonExportImg from "./ButtonExportImg";
+import WangEditor from "./WangEditor";
+import ButtonPrintImg from "./ButtonPrintImg";
 
 export default {
   name: "main-form",
-  components: { RaceForm },
+  components: { RaceForm, ButtonExportImg, WangEditor, ButtonPrintImg },
   props: {
     mainForm: {
       type: Object,
@@ -210,12 +229,18 @@ export default {
   },
   data() {
     return {
-      activeName: ["1", "2"],
+      activeName: ["1", "2", "4"],
     };
   },
+  mounted() {
+  },
+  beforeDestroy() {},
   methods: {
     setRaceStr(value) {
       this.mainForm.raceStr = value;
+    },
+    setContentHtml(value) {
+      this.mainForm.contentHtml = value;
     },
   },
 };

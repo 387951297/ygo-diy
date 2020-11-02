@@ -16,6 +16,7 @@
     ></p>
     <p
       class="atk-def"
+      :style="atkDefStyle"
       v-if="isMagicOrTrip"
     >ATK/<span
         v-html="'&nbsp;'"
@@ -96,6 +97,12 @@ export default {
         "magicTrap"
       );
     },
+    // 攻守的style
+    atkDefStyle() {
+      return {
+        lineHeight: store.state.atkDefLineHeight,
+      }
+    }
   },
   data() {
     return {};
@@ -138,6 +145,5 @@ export default {
   text-align: right;
   font-family: "MatrixBoldSmallCaps";
   font-size: 25px;
-  line-height: 15px;
 }
 </style>

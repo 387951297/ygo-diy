@@ -20,6 +20,7 @@
           :card-id-str="mainForm.cardIdStr"
         ></card-show>
       </el-card>
+      <div id="print-canvas"></div>
     </el-aside>
   </el-container>
 </template>
@@ -41,13 +42,16 @@ export default {
         rightAttributeType: "normal",
         innerImgSrc: require("@/assets/img/inner.jpg"),
         cardbagStr: "ABCD-C001",
-        raceStr:"【魔法師族·同調／效果】",
-        atkStr: '1111',
-        defStr: '2222',
-        contentHtml: 'abcd',
-        cardIdStr: '11111112'
+        raceStr: "【魔法師族·同調／效果】",
+        atkStr: "1111",
+        defStr: "2222",
+        contentHtml: "",
+        cardIdStr: "11111112",
       },
     };
+  },
+  async mounted() {
+
   },
 };
 </script>

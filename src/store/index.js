@@ -175,8 +175,16 @@ const store = new Vuex.Store({
         src: require("@/assets/img/m6.png")
       },
     ],
+    // 图片中 攻守的行高 默认15 导出时改为10
+    atkDefLineHeight: '15px',
   },
   mutations: {
+    startExportImg(state) {
+      state.atkDefLineHeight = '10px';
+    },
+    endExportImg(state) {
+      state.atkDefLineHeight = '15px';
+    }
   },
   actions: {
   },

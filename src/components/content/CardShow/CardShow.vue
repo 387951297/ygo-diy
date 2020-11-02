@@ -1,6 +1,9 @@
 <template>
   <!-- 完整的卡片显示 -->
-  <div class="card-img">
+  <div
+    class="card-img"
+    id="card-img"
+  >
     <!-- 卡片类型 -->
     <card-type :card-type="cardType"></card-type>
     <!-- 卡片标题 -->
@@ -171,6 +174,7 @@ export default {
   data() {
     return {};
   },
+  async mounted() {},
 };
 </script>
 <style scoped>
