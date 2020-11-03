@@ -112,15 +112,33 @@
             </el-form>
           </div>
         </el-collapse-item>
-        <!-- <el-collapse-item name="3">
+        <el-collapse-item name="3">
           <template slot="title">
             <el-tag
               type="info"
               effect="dark"
             >高级参数</el-tag>
           </template>
-          <div>简化流程：设计简洁直观的操作流程；</div>
-        </el-collapse-item> -->
+          <div class="card-center">
+            <el-form
+              ref="mainForm"
+              :model="mainForm"
+              label-width="auto"
+              class="main-form-box"
+            >
+              <el-form-item label="效果文本[]替换为「」">
+                <el-switch v-model="mainForm.isBracketSubstitution"></el-switch>
+              </el-form-item>
+              <el-form-item label="效果文本简体转繁体">
+                <el-switch v-model="mainForm.isS2t"></el-switch>
+              </el-form-item>
+              <el-form-item label="显示版权信息">
+                <el-switch v-model="mainForm.showCopyright"></el-switch>
+              </el-form-item>
+
+            </el-form>
+          </div>
+        </el-collapse-item>
         <el-collapse-item name="4">
           <template slot="title">
             <el-tag
@@ -141,11 +159,27 @@
               </el-form-item>
             </div>
           </el-form>
-
         </el-collapse-item>
       </el-collapse>
-
     </el-card>
+    <card-show
+      v-show="isShowCard"
+      :card-title="mainForm.cardTitle"
+      :card-type="mainForm.cardType"
+      :card-acctribute="mainForm.cardAcctribute"
+      :card-number="mainForm.cardNumber"
+      :right-attribute-type="mainForm.rightAttributeType"
+      :inner-img-src="mainForm.innerImgSrc"
+      :cardbag-str="mainForm.cardbagStr"
+      :race-str="mainForm.raceStr"
+      :atk-str="mainForm.atkStr"
+      :def-str="mainForm.defStr"
+      :content-html="mainForm.contentHtml"
+      :card-id-str="mainForm.cardIdStr"
+      :is-bracket-substitution="mainForm.isBracketSubstitution"
+      :is-s2t="mainForm.isS2t"
+      :show-copyright="mainForm.showCopyright"
+    ></card-show>
   </div>
 </template>
 
@@ -155,10 +189,17 @@ import RaceForm from "./RaceForm";
 import ButtonExportImg from "./ButtonExportImg";
 import WangEditor from "./WangEditor";
 import ButtonPrintImg from "./ButtonPrintImg";
+import CardShow from "@/components/content/CardShow/CardShow";
 
 export default {
   name: "main-form",
-  components: { RaceForm, ButtonExportImg, WangEditor, ButtonPrintImg },
+  components: {
+    RaceForm,
+    ButtonExportImg,
+    WangEditor,
+    ButtonPrintImg,
+    CardShow,
+  },
   props: {
     mainForm: {
       type: Object,
@@ -176,6 +217,9 @@ export default {
           defStr: "",
           contentHtml: "",
           cardIdStr: "",
+          isBracketSubstitution: true,
+          isS2t: false,
+          showCopyright: true,
         };
       },
     },
@@ -194,6 +238,9 @@ export default {
       if (this.isMonster) return;
       // 魔陷时 固定属性
       this.mainForm.cardAcctribute = value;
+    },
+    isShowCard(value) {
+      this.isShowCard = value;
     },
   },
   computed: {
@@ -226,14 +273,20 @@ export default {
       }
       return store.state.rightAttributeType;
     },
+    isShowCard: {
+      get() {
+        return store.state.isShowCard;
+      },
+      set(v) {},
+    },
   },
   data() {
     return {
       activeName: ["1", "2", "4"],
+      // isShowCard: store.state.isShowCard,
     };
   },
-  mounted() {
-  },
+  mounted() {},
   beforeDestroy() {},
   methods: {
     setRaceStr(value) {

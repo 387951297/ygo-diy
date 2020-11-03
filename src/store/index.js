@@ -177,13 +177,16 @@ const store = new Vuex.Store({
     ],
     // 图片中 攻守的行高 默认15 导出时改为10
     atkDefLineHeight: '15px',
+    isShowCard: false,
   },
   mutations: {
     startExportImg(state) {
       state.atkDefLineHeight = '10px';
+      state.isShowCard = true;
     },
     endExportImg(state) {
       state.atkDefLineHeight = '15px';
+      state.isShowCard = false;
     }
   },
   actions: {

@@ -28,7 +28,7 @@ export default {
           // backgroundColor: "transparent",
           allowTaint: true,
           useCORS: true,
-          x: document.getElementById("card-img").offsetLeft + 17, // 为什么是17我也不知道
+          x: document.getElementById("card-img").offsetLeft,
           scrollY: -window.pageYOffset,
           scrollX: -window.pageXOffset,
         }

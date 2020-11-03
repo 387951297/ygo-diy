@@ -101,8 +101,8 @@ export default {
     atkDefStyle() {
       return {
         lineHeight: store.state.atkDefLineHeight,
-      }
-    }
+      };
+    },
   },
   data() {
     return {};
