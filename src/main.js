@@ -10,6 +10,10 @@ import js_screen_shots from 'js_screen_shots';
 Vue.prototype.$Canvas2Image = js_screen_shots.Canvas2Image;
 Vue.prototype.$html2canvas = js_screen_shots.html2canvas;
 
+// 图片剪裁
+import VueCropper from 'vue-cropper'
+Vue.use(VueCropper)
+
 import './assets/font/font.css';
 
 import App from './App.vue'

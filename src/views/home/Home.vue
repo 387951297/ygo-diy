@@ -41,20 +41,20 @@ export default {
   data() {
     return {
       mainForm: {
-        cardTitle: "123",
+        cardTitle: "",
         cardType: "normal",
         cardAcctribute: "light",
         cardNumber: 1,
         rightAttributeType: "normal",
         innerImgSrc: require("@/assets/img/inner.jpg"),
-        cardbagStr: "ABCD-C001",
-        raceStr: "【魔法師族·同調／效果】",
-        atkStr: "1111",
-        defStr: "2222",
+        cardbagStr: "",
+        raceStr: "",
+        atkStr: "",
+        defStr: "",
         contentHtml: "",
-        cardIdStr: "11111112",
+        cardIdStr: "",
         isBracketSubstitution: true,
-        isS2t: false,
+        isS2t: true,
         showCopyright: true,
       },
     };

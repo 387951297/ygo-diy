@@ -31,6 +31,16 @@ export default {
         return "normal";
       },
     },
+    cardType: {
+      type: String,
+      validator(value) {
+        // 这个值必须匹配下列字符串中的一个
+        return store.getters.cardTypeValues.indexOf(value) !== -1;
+      },
+      default() {
+        return "derivative";
+      },
+    },
   },
   computed: {
     typeSrc() {
@@ -39,9 +49,19 @@ export default {
       ).src;
     },
     src() {
-      return this.rightAttributeType == "normal"
-        ? require("@/assets/img/s1.png")
-        : require("@/assets/img/s2.png");
+      let src = "";
+      if (this.cardType == "magic") {
+        src =
+          this.rightAttributeType == "normal"
+            ? require("@/assets/img/s1.png")
+            : require("@/assets/img/s2.png");
+      } else if (this.cardType == "trap") {
+        src =
+          this.rightAttributeType == "normal"
+            ? require("@/assets/img/t1.png")
+            : require("@/assets/img/t2.png");
+      }
+      return src;
     },
   },
   data() {

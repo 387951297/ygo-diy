@@ -9,7 +9,7 @@
     <!-- 卡片标题 -->
     <card-title
       :card-type="cardType"
-      :card-title="cardTitle"
+      :card-title="cardTitleFormate"
     ></card-title>
     <!-- 卡片属性 -->
     <card-attribute :card-acctribute="cardAcctribute"></card-attribute>
@@ -23,6 +23,7 @@
     <card-right-attribute
       v-if="showRightAttribute"
       :right-attribute-type="rightAttributeType"
+      :card-type="cardType"
     ></card-right-attribute>
     <!-- 卡图 -->
     <card-inner-img :inner-img-src="innerImgSrc"></card-inner-img>
@@ -178,10 +179,19 @@ export default {
         str = this.tran(str);
       }
       if (this.isBracketSubstitution) {
-        return str.replace(/\[/g, "「").replace(/\]/g, "」");
-      } else {
-        return str;
+        str = str.replace(/\[/g, "「").replace(/\]/g, "」");
       }
+      return str;
+    },
+    cardTitleFormate() {
+      let str = this.cardTitle;
+      if (this.isS2t) {
+        str = this.tran(str);
+      }
+      if (this.isBracketSubstitution) {
+        str = str.replace(/\[/g, "「").replace(/\]/g, "」");
+      }
+      return str;
     },
   },
   watch: {

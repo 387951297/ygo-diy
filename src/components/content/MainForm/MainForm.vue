@@ -82,7 +82,7 @@
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="卡图">
-                <el-input v-model="mainForm.innerImgSrc"></el-input>
+                <innerimg-upload @setInnerImgUrl="setInnerImgUrl"></innerimg-upload>
               </el-form-item>
               <el-form-item label="卡包信息">
                 <el-input v-model="mainForm.cardbagStr"></el-input>
@@ -126,10 +126,10 @@
               label-width="auto"
               class="main-form-box"
             >
-              <el-form-item label="效果文本[]替换为「」">
+              <el-form-item label="效果文本、标题 []替换为「」">
                 <el-switch v-model="mainForm.isBracketSubstitution"></el-switch>
               </el-form-item>
-              <el-form-item label="效果文本简体转繁体">
+              <el-form-item label="效果文本、标题 简体转繁体">
                 <el-switch v-model="mainForm.isS2t"></el-switch>
               </el-form-item>
               <el-form-item label="显示版权信息">
@@ -190,6 +190,7 @@ import ButtonExportImg from "./ButtonExportImg";
 import WangEditor from "./WangEditor";
 import ButtonPrintImg from "./ButtonPrintImg";
 import CardShow from "@/components/content/CardShow/CardShow";
+import InnerimgUpload from "./InnerimgUpload";
 
 export default {
   name: "main-form",
@@ -199,6 +200,7 @@ export default {
     WangEditor,
     ButtonPrintImg,
     CardShow,
+    InnerimgUpload,
   },
   props: {
     mainForm: {
@@ -218,7 +220,7 @@ export default {
           contentHtml: "",
           cardIdStr: "",
           isBracketSubstitution: true,
-          isS2t: false,
+          isS2t: true,
           showCopyright: true,
         };
       },
@@ -294,6 +296,9 @@ export default {
     },
     setContentHtml(value) {
       this.mainForm.contentHtml = value;
+    },
+    setInnerImgUrl(url) {
+      this.mainForm.innerImgSrc = url;
     },
   },
 };
