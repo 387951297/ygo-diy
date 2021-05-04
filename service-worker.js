@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "ygo-diy/precache-manifest.776df0b723e33cb30b09e6d6031dcc2f.js"
+  "precache-manifest.acb274afcc8a06363524b7a017721895.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "ygo-diy"});
